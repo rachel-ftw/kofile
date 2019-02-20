@@ -69,7 +69,8 @@ class SearchMovies extends Component {
           </select>
           </div>
           <div className="padding-right">
-            Title Contains: <input
+            Title Contains:
+            <input
               name="searchTerm"
               onChange={e => this.handleInputChange(e)}
               type="text"
