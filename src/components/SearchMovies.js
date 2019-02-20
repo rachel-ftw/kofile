@@ -5,7 +5,7 @@ import {
   filterMovies,
   getLocalStorage,
   mapReviewsToMovies,
-  setLocalStorage,
+  setLocalStorage
 } from '../lib'
 
 class SearchMovies extends Component {
@@ -16,13 +16,13 @@ class SearchMovies extends Component {
       decade: null,
       movieList: [],
       reviews: [],
-      searchTerm: '',
+      searchTerm: ''
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const localMovieList = getLocalStorage('movieList')
     const localReviews = getLocalStorage('reviews')
 
@@ -37,16 +37,16 @@ class SearchMovies extends Component {
       )).then(data => {
         setLocalStorage('movieList', data[0])
         setLocalStorage('reviews', data[1])
-        this.setState({ movieList: data[0], reviews: data[1]})
+        this.setState({ movieList: data[0], reviews: data[1] })
       }).catch(err => console.log(err.message))
     }
   }
 
-  handleInputChange(e) {
+  handleInputChange (e) {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  render() {
+  render () {
     const { searchTerm, decade, reviews, movieList } = this.state
 
     const filteredMovies = filterMovies(movieList, decade, searchTerm)
@@ -54,26 +54,26 @@ class SearchMovies extends Component {
 
     return (
       <div>
-        <div className="search flex-row">
-          <div className="padding-right">
+        <div className='search flex-row'>
+          <div className='padding-right'>
           Decade: <select
-            name="decade"
+            name='decade'
             onChange={e => this.handleInputChange(e)}>
-            <option value="none"></option>
-            <option value="1960">1960</option>
-            <option value="1970">1970</option>
-            <option value="1980">1980</option>
-            <option value="1990">1990</option>
-            <option value="2000">2000</option>
-            <option value="2010">2010</option>
+            <option value='none' />
+            <option value='1960'>1960</option>
+            <option value='1970'>1970</option>
+            <option value='1980'>1980</option>
+            <option value='1990'>1990</option>
+            <option value='2000'>2000</option>
+            <option value='2010'>2010</option>
           </select>
           </div>
-          <div className="padding-right">
+          <div className='padding-right'>
             Title Contains:
             <input
-              name="searchTerm"
+              name='searchTerm'
               onChange={e => this.handleInputChange(e)}
-              type="text"
+              type='text'
               value={searchTerm} />
           </div>
         </div>

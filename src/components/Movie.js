@@ -8,7 +8,7 @@ const ReviewCard = ({ data }) => (
 )
 
 class Movie extends React.Component {
-  constructor() {
+  constructor () {
     super()
     this.state = {
       isOpinionOpen: false
@@ -18,36 +18,36 @@ class Movie extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  toggleOpinion() {
-    this.setState({ isOpinionOpen: !this.state.isOpinionOpen})
+  toggleOpinion () {
+    this.setState({ isOpinionOpen: !this.state.isOpinionOpen })
   }
 
-  handleClick() {
+  handleClick () {
     this.toggleOpinion()
   }
 
-  render() {
+  render () {
     const { data: { url, title, year, score } } = this.props
 
-    return(
-    <div className='movie-card'>
-      <div className='movie-card__row flex-row'>
-        <div className='padding-right' onClick={this.handleClick}>
-          <img
-            className='movie-card__row__icon'
-            src={`assets/${score > 0.75 ? 'tomato' : 'splat'}.svg`}
-          />
+    return (
+      <div className='movie-card'>
+        <div className='movie-card__row flex-row'>
+          <div className='padding-right' onClick={this.handleClick}>
+            <img
+              className='movie-card__row__icon'
+              src={`assets/${score > 0.75 ? 'tomato' : 'splat'}.svg`}
+            />
+          </div>
+          <div className='padding-right' onClick={this.handleClick}>
+            {score * 100}%
+          </div>
+          <div className='padding-right'>
+            <a className='movie-card__row__rt-link' href={url}>{title}</a>
+          </div>
+          <div className='padding-right' onClick={this.handleClick}>({year})</div>
         </div>
-        <div className='padding-right' onClick={this.handleClick}>
-          {score * 100}%
-        </div>
-        <div className='padding-right'>
-          <a className='movie-card__row__rt-link' href={url}>{title}</a>
-        </div>
-        <div className='padding-right' onClick={this.handleClick}>({year})</div>
+        {this.state.isOpinionOpen && <ReviewCard data={this.props.data} />}
       </div>
-      {this.state.isOpinionOpen && <ReviewCard data={this.props.data} />}
-    </div>
     )
   }
 }

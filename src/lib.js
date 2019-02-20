@@ -9,7 +9,7 @@ const alphabetizeTitles = (a, b) => {
 }
 
 const byDecade = (decade, year) => {
-  if (decade === null || decade === 'none') { return 1 }
+  if (decade === null || decade === 'none') { return true }
   decade = parseInt(decade)
   return year >= decade && year <= decade + 9
 }
@@ -29,9 +29,10 @@ export const mapReviewsToMovies = (movieData, reviews) => movieData.map(movie =>
 
 export const filterMovies = (movieList, decade, searchTerm) => (
   movieList.filter(movie => {
-      if (searchTerm.length < 2) { return true }
-      return findMatching(searchTerm, movie.title)
-    })
+    if (searchTerm.length < 2) { return true }
+
+    return findMatching(searchTerm, movie.title)
+  })
     .filter(movie => byDecade(decade, movie.year))
     .sort(alphabetizeTitles)
 )
